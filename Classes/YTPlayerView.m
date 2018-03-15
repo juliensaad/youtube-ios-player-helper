@@ -853,7 +853,14 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 }
 
 - (UIWebView *)createNewWebView {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0, 0.0, 4096.0, 2160.0)];
+    CGRect frame;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        frame = CGRectMake(0.0, 0.0, 4096.0, 2160.0);
+    }
+    else {
+        frame = CGRectZero;
+    }
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
     webView.translatesAutoresizingMaskIntoConstraints = NO;
     webView.scalesPageToFit = YES;
     webView.scrollView.scrollEnabled = NO;
